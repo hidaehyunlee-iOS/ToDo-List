@@ -12,12 +12,18 @@ var tasks = [TaskData]()
 
 class TodoListViewController: UIViewController {
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func addButtom(_ sender: UIBarButtonItem) {
         let vc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
         
         vc.title = "할 일 추가"
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // Segmented Control의 값 변경 시 호출되는 메서드
+    @IBAction func segmentValueChaned(_ sender: UISegmentedControl) {
+        tableView.reloadData() // 선택한 Segment에 따라 테이블 뷰 데이터를 다시 로드
     }
     
     override func viewDidLoad() {
@@ -89,14 +95,29 @@ extension TodoListViewController: UITableViewDelegate {
 
 extension TodoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        if segmentedControl.selectedSegmentIndex == 0 {
+            // 할 일 목록 Segment 선택 시, 전체 데이터 수 반환 x -> false이
+            return tasks.count
+        } else {
+            // 완료 목록 Segment 선택 시, 체크마크가 된 데이터 수 반환
+            return tasks.filter { $0.isDone }.count
+        }
     }
     
     func tableView(_ tableView  : UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var tasksToShow: TaskData
+
+        if segmentedControl.selectedSegmentIndex == 0 {
+            // 전체 데이터 사용
+            tasksToShow = tasks[indexPath.row]
+        } else {
+            // 체크마크가 된 데이터만 사용
+            tasksToShow = tasks.filter { $0.isDone }[indexPath.row]
+        }
         
-        cell.textLabel?.text = tasks[indexPath.row].text
-        if tasks[indexPath.row].isDone {
+        cell.textLabel?.text = tasksToShow.text
+        if tasksToShow.isDone {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -106,26 +127,26 @@ extension TodoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
-            tasks.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let alertController = UIAlertController(title: "확인", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
             
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                tasks.remove(at: indexPath.row)
+                
+                // 변경 사항을 User Defaults에 반영
+                self.saveAllData()
+                
+                // 테이블 뷰의 행 수를 업데이트
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            
+            present(alertController, animated: true)
+            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         } else if editingStyle == .insert {}
     }
-    
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//           let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
-//                   tableView.deleteRows(at: [indexPath], with: .automatic)
-//                completion(true)
-//            }
-//
-//            action.backgroundColor = .white
-//            action.image = #imageLiteral(resourceName: "swiftLogo.JPG")
-//
-//            let configuration = UISwipeActionsConfiguration(actions: [action])
-//            configuration.performsFirstActionWithFullSwipe = false
-//            return configuration
-//       }
-//
 }

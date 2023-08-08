@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,101 +17,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EYO-4Q-EV6"/>
+                        <segue destination="bCJ-Vd-Ksz" kind="relationship" relationship="rootViewController" id="I3f-10-7TQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBC-I5-bam" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-868" y="-2"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFF-tL-pJm">
-                                <rect key="frame" x="57" y="525" width="278" height="81"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="278" id="KJJ-EN-fcp"/>
-                                    <constraint firstAttribute="height" constant="81" id="PTl-bE-Ygw"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="checklist.unchecked" catalog="system" title="                                  To-Do">
-                                    <backgroundConfiguration key="background" cornerRadius="25">
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <segue destination="bCJ-Vd-Ksz" kind="show" id="sf9-70-uVE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9n-Ro-PjA">
-                                <rect key="frame" x="57" y="633" width="278" height="81"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="81" id="9j2-zo-sJd"/>
-                                    <constraint firstAttribute="width" constant="278" id="V3Y-W9-VtH"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="                                  Done">
-                                    <imageReference key="image" image="checkmark.circle.fill" catalog="system" symbolScale="large"/>
-                                    <backgroundConfiguration key="background" cornerRadius="25">
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="DoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SQY-gi-BhY"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swiftLogo.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="ezE-KY-9nv">
-                                <rect key="frame" x="71" y="206" width="250" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="c5w-Lr-NXd"/>
-                                    <constraint firstAttribute="height" constant="250" id="gRN-kR-anj"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="125"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📋" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gs-B6-77Y">
-                                <rect key="frame" x="100" y="103" width="196" height="64"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="56"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="H9n-Ro-PjA" firstAttribute="top" secondItem="KFF-tL-pJm" secondAttribute="bottom" constant="27" id="379-Pi-9T8"/>
-                            <constraint firstItem="H9n-Ro-PjA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="7Dy-4Z-HRw"/>
-                            <constraint firstItem="ezE-KY-9nv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="TAS-Iw-kVx"/>
-                            <constraint firstItem="0gs-B6-77Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VD5-Hr-wTx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H9n-Ro-PjA" secondAttribute="trailing" constant="58" id="YW9-xy-hfh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ezE-KY-9nv" secondAttribute="trailing" constant="72" id="cHs-b3-SJz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0gs-B6-77Y" secondAttribute="trailing" constant="97" id="d9i-AP-exL"/>
-                            <constraint firstItem="KFF-tL-pJm" firstAttribute="top" secondItem="ezE-KY-9nv" secondAttribute="bottom" constant="69" id="dqR-4k-hQ8"/>
-                            <constraint firstItem="ezE-KY-9nv" firstAttribute="top" secondItem="0gs-B6-77Y" secondAttribute="bottom" constant="39" id="jMT-7K-Ivg"/>
-                            <constraint firstItem="0gs-B6-77Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="puj-Iy-FYV"/>
-                            <constraint firstItem="KFF-tL-pJm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="sJF-rW-buT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KFF-tL-pJm" secondAttribute="trailing" constant="58" id="vSq-KP-Tcj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="H9n-Ro-PjA" secondAttribute="bottom" constant="104" id="zsF-Kx-fpF"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="ROw-JP-867"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5.343511450381679" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-98" y="-2"/>
         </scene>
         <!--TodoListView Controller-->
         <scene sceneID="22M-Ku-rPW">
@@ -123,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YPH-cD-nkE">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="153" width="393" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="PzQ-HD-JnI" style="IBUITableViewCellStyleDefault" id="kqu-Hd-uZg">
@@ -145,17 +55,31 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RTV-UZ-mHG">
+                                <rect key="frame" x="0.0" y="103" width="393" height="51"/>
+                                <segments>
+                                    <segment title="할 일 목록"/>
+                                    <segment title="완료 목록"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentValueChaned:" destination="bCJ-Vd-Ksz" eventType="valueChanged" id="1Hb-Bm-umP"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="znl-ZW-eu1"/>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="znl-ZW-eu1" firstAttribute="trailing" secondItem="YPH-cD-nkE" secondAttribute="trailing" id="18d-Tt-NGq"/>
-                            <constraint firstItem="YPH-cD-nkE" firstAttribute="top" secondItem="znl-ZW-eu1" secondAttribute="top" id="aSo-id-qcn"/>
+                            <constraint firstItem="RTV-UZ-mHG" firstAttribute="leading" secondItem="znl-ZW-eu1" secondAttribute="leading" id="1Ur-xn-Zf8"/>
+                            <constraint firstItem="YPH-cD-nkE" firstAttribute="top" secondItem="znl-ZW-eu1" secondAttribute="top" constant="50" id="aSo-id-qcn"/>
+                            <constraint firstItem="YPH-cD-nkE" firstAttribute="top" secondItem="RTV-UZ-mHG" secondAttribute="bottom" id="l8d-Wc-C5d"/>
+                            <constraint firstItem="RTV-UZ-mHG" firstAttribute="top" secondItem="znl-ZW-eu1" secondAttribute="top" id="oiW-o4-uWz"/>
+                            <constraint firstItem="znl-ZW-eu1" firstAttribute="trailing" secondItem="RTV-UZ-mHG" secondAttribute="trailing" id="puO-Z1-5ri"/>
                             <constraint firstItem="znl-ZW-eu1" firstAttribute="bottom" secondItem="YPH-cD-nkE" secondAttribute="bottom" id="ua8-c2-aqH"/>
                             <constraint firstItem="YPH-cD-nkE" firstAttribute="leading" secondItem="znl-ZW-eu1" secondAttribute="leading" id="yjd-1j-UIs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="목록" largeTitleDisplayMode="always" id="hiF-s8-OfH">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="hiF-s8-OfH">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="A2R-5x-Cbx">
                             <connections>
                                 <action selector="addButtom:" destination="bCJ-Vd-Ksz" id="BQN-h1-gu8"/>
@@ -163,6 +87,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentedControl" destination="RTV-UZ-mHG" id="cpo-bS-wdc"/>
                         <outlet property="tableView" destination="YPH-cD-nkE" id="OhD-bw-5HM"/>
                     </connections>
                 </viewController>
@@ -230,12 +155,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checklist.unchecked" catalog="system" width="128" height="107"/>
-        <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="swiftLogo.JPG" width="2048" height="2048"/>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
