@@ -73,29 +73,17 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        //let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskController
-        
-        //vc.title = "할 일 추가"
-        //vc.task = tasks[indexPath.row].text
-        
-        // 이미 체크되있는 경우 return
-        guard !tasks[indexPath.row].isDone else {
-            return
-        }
-        
-        // 리스트 click 시 완료된 할일 표시(checkmark)
-        tasks[indexPath.row].isDone = true
-
-        let dialog = UIAlertController(title: "Todo List", message: "할 일을 완료했습니다.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "확인", style: UIAlertAction.Style.default)
+        let dialog = UIAlertController(title: "🎉", message: "할 일을 완료했습니다.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default)
         dialog.addAction(action)
         
-        self.present(dialog, animated: true, completion: nil)
+        tasks[indexPath.row].isDone.toggle() // 체크마크 상태 토글
         
-        tableView.reloadData()
+        if tasks[indexPath.row].isDone {
+            self.present(dialog, animated: true, completion: nil)
+        }
 
-       // navigationController?.pushViewController(vc, animated: true)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
