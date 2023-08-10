@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 var tasks = [TaskData]()
+var doneTasks = [TaskData]()
 
 class TodoListViewController: UIViewController {
     
@@ -20,12 +21,7 @@ class TodoListViewController: UIViewController {
         vc.title = "할 일 추가"
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    // Segmented Control의 값 변경 시 호출되는 메서드
-    @IBAction func segmentValueChaned(_ sender: UISegmentedControl) {
-        tableView.reloadData() // 선택한 Segment에 따라 테이블 뷰 데이터를 다시 로드
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +29,12 @@ class TodoListViewController: UIViewController {
         tableView.dataSource = self
         
         loadAllData()
+        loadCompletedData()
+    }
+    
+    // Segmented Control의 값 변경 시 호출되는 메서드
+    @IBAction func segmentValueChaned(_ sender: UISegmentedControl) {
+        tableView.reloadData() // 선택한 Segment에 따라 테이블 뷰 데이터를 다시 로드
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,51 +81,61 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let dialog = UIAlertController(title: "🎉", message: "할 일을 완료했습니다.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "확인", style: .default)
-        dialog.addAction(action)
         
-        tasks[indexPath.row].isDone.toggle() // 체크마크 상태 토글
+        var taskToShow: TaskData
         
-        if tasks[indexPath.row].isDone {
-            self.present(dialog, animated: true, completion: nil)
+        if segmentedControl.selectedSegmentIndex == 0 {
+            taskToShow = tasks[indexPath.row]
+            
+            let dialog = UIAlertController(title: "🎉", message: "할 일을 완료했습니다.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default)
+            dialog.addAction(action)
+            
+            taskToShow.isDone = true
+            
+            if taskToShow.isDone {
+                self.present(dialog, animated: true, completion: nil)
+                doneTasks.append(taskToShow) // Move to doneTasks
+                tasks.remove(at: indexPath.row) // Remove from tasks
+            }
+        } else {
+            taskToShow = doneTasks[indexPath.row]
+            taskToShow.isDone = false
+            
+            tasks.append(taskToShow) // Move back to tasks
+            doneTasks.remove(at: indexPath.row) // Remove from doneTasks
         }
-
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        tableView.reloadData() // Reload the entire table view
+        saveAllData() // Save changes to User Defaults
     }
+
 }
 
 extension TodoListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentedControl.selectedSegmentIndex == 0 {
-            // 할 일 목록 Segment 선택 시, 전체 데이터 수 반환 x -> false이
-            return tasks.count
-        } else {
-            // 완료 목록 Segment 선택 시, 체크마크가 된 데이터 수 반환
-            return tasks.filter { $0.isDone }.count
-        }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                if segmentedControl.selectedSegmentIndex == 0 {
+                    return tasks.count
+                } else {
+                    return doneTasks.count
+                }
     }
     
     func tableView(_ tableView  : UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var tasksToShow: TaskData
-
-        if segmentedControl.selectedSegmentIndex == 0 {
-            // 전체 데이터 사용
-            tasksToShow = tasks[indexPath.row]
-        } else {
-            // 체크마크가 된 데이터만 사용
-            tasksToShow = tasks.filter { $0.isDone }[indexPath.row]
-        }
-        
-        cell.textLabel?.text = tasksToShow.text
-        if tasksToShow.isDone {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        
-        return cell
+                
+                var taskToShow: TaskData
+                
+                if segmentedControl.selectedSegmentIndex == 0 {
+                    taskToShow = tasks[indexPath.row]
+                } else {
+                    taskToShow = doneTasks[indexPath.row]
+                }
+                
+                cell.textLabel?.text = taskToShow.text
+                cell.accessoryType = taskToShow.isDone ? .checkmark : .none
+                
+                return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -131,8 +143,12 @@ extension TodoListViewController: UITableViewDataSource {
             let alertController = UIAlertController(title: "확인", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
-                tasks.remove(at: indexPath.row)
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [self] _ in
+                if segmentedControl.selectedSegmentIndex == 0 {
+                    tasks.remove(at: indexPath.row)
+                } else {
+                    doneTasks.remove(at: indexPath.row)
+                }
                 
                 // 변경 사항을 User Defaults에 반영
                 self.saveAllData()
@@ -145,8 +161,37 @@ extension TodoListViewController: UITableViewDataSource {
             alertController.addAction(deleteAction)
             
             present(alertController, animated: true)
-            
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        } else if editingStyle == .insert {}
+        } else if editingStyle == .insert {
+            // Insertion logic, if needed
+        }
+    }
+
+}
+
+extension TodoListViewController {
+    func loadCompletedData() {
+        let userDefaults = UserDefaults.standard
+        guard let data = userDefaults.object(forKey: "completedItems") as? [[String: AnyObject]] else {
+            return
+        }
+        
+        doneTasks = data.map {
+            let text = $0["text"] as? String
+            let isDone = $0["isDone"] as? Bool
+            return TaskData(text: text!, isDone: isDone!)
+        }
+    }
+    
+    func saveCompletedData() {
+        let data = doneTasks.map {
+            [
+                "text": $0.text,
+                "isDone": $0.isDone
+            ] as [String : Any]
+        }
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(data, forKey: "completedItems")
+        userDefaults.synchronize()
     }
 }
