@@ -28,16 +28,26 @@ class TodoListViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    @IBAction func addButtom(_ sender: UIBarButtonItem) {
-        let vc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
-        vc.title = "할 일 추가"
+    lazy var addButton: UIButton = {
+        let addButton = UIButton()
         
-        //                vc.didAddHandler = { [weak self] in
-        //                    self?.loadAllData()
-        //                    self?.tableView.reloadData()
-        //                }
+        addButton.translatesAutoresizingMaskIntoConstraints = false // 버튼에 대한 오토레이아웃 설정
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 60, weight: .light)
+        let image = UIImage(systemName: "plus.circle.fill", withConfiguration: imageConfig)
+        addButton.setImage(image, for: .normal)
+        addButton.tintColor = #colorLiteral(red: 0.6891200542, green: 0.6007182598, blue: 0.8024315238, alpha: 1)
         
-        navigationController?.pushViewController(vc, animated: true)
+        addButton.addTarget(self, action: #selector(self.addTasks(_:)), for: .touchUpInside)
+
+        return addButton
+    }()
+    
+    @objc internal func addTasks(_ sender: UIButton) {
+        print("TodoListToEntry")
+        let nextVc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
+        nextVc.title = "할 일 추가"
+        
+        navigationController?.pushViewController(nextVc, animated: true)
     }
     
     // Segmented Control의 값 변경 시 호출되는 메서드
@@ -49,6 +59,32 @@ class TodoListViewController: UIViewController {
         super.viewDidAppear(animated)
         saveAllData()
         tableView.reloadData()
+        configureAddButton()
+        configureNavController()
+    }
+    
+    private func configureAddButton() {
+        view.addSubview(addButton)
+        
+        NSLayoutConstraint.activate([
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40), // 오른쪽 여백 조절
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20), // 아래 여백 조절
+            addButton.widthAnchor.constraint(equalToConstant: 60), // 버튼 크기 조절
+            addButton.heightAnchor.constraint(equalToConstant: 60), // 버튼 크기 조절
+        ])
+    }
+    
+    private func configureNavController() {
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = UIColor.white // 뒤로가기, 저장 버튼 색 변경
+
+        // 이전 뷰 컨트롤러가 UINavigationController의 최상위 뷰 컨트롤러인 경우
+        if let previousViewController = navigationController?.viewControllers.last?.title {
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: previousViewController, style: .plain, target: nil, action: nil)
+        } else {
+            // 이전 뷰 컨트롤러가 없거나 UINavigationController의 최상위 뷰 컨트롤러가 아닌 경우
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
     }
 }
 
