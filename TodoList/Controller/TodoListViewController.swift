@@ -45,7 +45,7 @@ class TodoListViewController: UIViewController {
     @objc internal func addTasks(_ sender: UIButton) {
         print("TodoListToEntry")
         let nextVc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
-        nextVc.title = "할 일 추가"
+        nextVc.title = "✍🏻 할 일 추가"
         
         navigationController?.pushViewController(nextVc, animated: true)
     }
