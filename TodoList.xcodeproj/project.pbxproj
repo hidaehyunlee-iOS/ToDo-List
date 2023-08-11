@@ -14,6 +14,7 @@
 		DE398D682A7A01FD00C035F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE398D662A7A01FD00C035F2 /* LaunchScreen.storyboard */; };
 		DE398D732A7A664C00C035F2 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE398D722A7A664C00C035F2 /* TodoListViewController.swift */; };
 		DE398D772A7A6D7500C035F2 /* TodoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE398D762A7A6D7500C035F2 /* TodoData.swift */; };
+		DE4DAB2C2A85F35C00777AA5 /* EntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE4DAB2A2A85F35C00777AA5 /* EntryViewController.storyboard */; };
 		DE514AFA2A80D27B0088123F /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE514AF92A80D27B0088123F /* EntryViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		DE398D692A7A01FD00C035F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE398D722A7A664C00C035F2 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		DE398D762A7A6D7500C035F2 /* TodoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoData.swift; sourceTree = "<group>"; };
+		DE4DAB2B2A85F35C00777AA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TodoList/View/Base.lproj/EntryViewController.storyboard; sourceTree = "<group>"; };
 		DE514AF92A80D27B0088123F /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 		DE398D702A7A655D00C035F2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DE4DAB2A2A85F35C00777AA5 /* EntryViewController.storyboard */,
 				DE398D612A7A01FD00C035F2 /* Main.storyboard */,
 			);
 			path = View;
@@ -157,6 +160,7 @@
 			files = (
 				DE398D682A7A01FD00C035F2 /* LaunchScreen.storyboard in Resources */,
 				DE398D652A7A01FD00C035F2 /* Assets.xcassets in Resources */,
+				DE4DAB2C2A85F35C00777AA5 /* EntryViewController.storyboard in Resources */,
 				DE398D632A7A01FD00C035F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +197,14 @@
 				DE398D672A7A01FD00C035F2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DE4DAB2A2A85F35C00777AA5 /* EntryViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE4DAB2B2A85F35C00777AA5 /* Base */,
+			);
+			name = EntryViewController.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
