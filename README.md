@@ -22,7 +22,7 @@
 
 ## 02. 구현 기능
 
-![image-20230811170556343](https://github.com/hidaehyunlee-iOS/ToDo-List/assets/37580034/3a4a855a-2e1f-4b70-9f91-61d82fb61ab5)
+<img width="2013" alt="image" src="https://github.com/hidaehyunlee-iOS/ToDo-List/assets/37580034/9a731d29-f62f-4df1-b1ee-9137fe90a813">
 
 #### 2.1. TodoListViewController
 
@@ -37,7 +37,7 @@
 
 #### 2.2. EntryViewController
 
-> 새로운 할 일을 입력받아 TodoList에 추가한다.
+> 새로운 할 일을 입력받아 TodoList에 추가합니다.
 
 - `UITextField`에 할 일 텍스트 입력 후 '저장' 버튼을 누르거나 키보드의 Return 키를 누르면 할 일을 TodoList에 추가합니다.
 - `didAddHandler` 클로저를 호출하여 할 일 추가가 완료되었음을 알립니다.
