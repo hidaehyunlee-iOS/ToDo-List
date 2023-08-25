@@ -128,7 +128,7 @@ extension TodoListViewController: UITableViewDelegate {
 
 extension TodoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return segmentedControl.selectedS == 0 ? tasks.count : doneTasks.count
+        return segmentedControl.selectedSegmentIndex == 0 ? tasks.count : doneTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
