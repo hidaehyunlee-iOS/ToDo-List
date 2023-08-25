@@ -1,3 +1,4 @@
 .DS_Store
 TodoList/View/Base.lproj/EntryViewController~.storyboard
 TodoList/View/TodoList/
+*.xcuserstate
