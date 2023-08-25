@@ -11,7 +11,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet var field: UITextField!
     var selectedCategory = "내일배움캠프"
-    var didAddHandler: (() -> Void)?
+    // var didAddHandler: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +55,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         // TodoListViewController에 생성한 tasks 전역변수에 append
         tasks.append(newTask)
         
-        // Done 버튼 클릭 시 새로운 TodoList 객체 생성
-        // 생성한 객체에 입력한 정보 저장
-        didAddHandler?()
+        // didAddHandler?()
         navigationController?.popViewController(animated: true)
     }
 }

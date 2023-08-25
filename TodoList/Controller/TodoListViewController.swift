@@ -102,8 +102,9 @@ extension TodoListViewController: UITableViewDelegate {
             taskToShow = tasks[indexPath.row]
             
             let dialog = UIAlertController(title: "\(taskToShow.text)", message: "🎉 할 일을 완료했습니다.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "확인", style: .default)
-            dialog.addAction(action)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                dialog.dismiss(animated: true, completion: nil)
+            }
             
             taskToShow.isDone = true
             
