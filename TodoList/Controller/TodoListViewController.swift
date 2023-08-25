@@ -12,26 +12,19 @@ var tasks = [TaskData]()
 var doneTasks = [TaskData]()
 
 class TodoListViewController: UIViewController {
+    let manager: TaskDataManager = TaskDataManager()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureTableView()
-        loadAllData()
-        loadCompletedData()
+    @IBAction func segmentValueChaned(_ sender: UISegmentedControl) {
+        tableView.reloadData() // Segmented Control의 값 변경 시 데이터 다시 로드
     }
-    
-    private func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
+
     lazy var addButton: UIButton = {
         let addButton = UIButton()
         
-        addButton.translatesAutoresizingMaskIntoConstraints = false // 버튼에 대한 오토레이아웃 설정
+        addButton.translatesAutoresizingMaskIntoConstraints = false
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 60, weight: .light)
         let image = UIImage(systemName: "plus.circle.fill", withConfiguration: imageConfig)
         addButton.setImage(image, for: .normal)
@@ -50,17 +43,28 @@ class TodoListViewController: UIViewController {
         navigationController?.pushViewController(nextVc, animated: true)
     }
     
-    // Segmented Control의 값 변경 시 호출되는 메서드
-    @IBAction func segmentValueChaned(_ sender: UISegmentedControl) {
-        tableView.reloadData() // 선택한 Segment에 따라 테이블 뷰 데이터를 다시 로드
+    override func viewDidLoad() {
+        super.viewDidLoad()
+                
+        configureTableView()
+        
+        manager.loadAllData()
+        manager.loadCompletedData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        saveAllData()
+        
+        manager.saveAllData()
         tableView.reloadData()
+        
         configureAddButton()
         configureNavController()
+    }
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     private func configureAddButton() {
@@ -117,8 +121,8 @@ extension TodoListViewController: UITableViewDelegate {
         }
         
         tableView.reloadData()
-        saveAllData()
-        saveCompletedData()
+        manager.saveAllData()
+        manager.saveCompletedData()
     }
 }
 
@@ -149,8 +153,8 @@ extension TodoListViewController: UITableViewDataSource {
                     doneTasks.remove(at: indexPath.row)
                 }
                 
-                saveAllData()
-                saveCompletedData()
+                manager.saveAllData()
+                manager.saveCompletedData()
                 
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
@@ -162,66 +166,4 @@ extension TodoListViewController: UITableViewDataSource {
         }
     }
     
-}
-
-extension TodoListViewController {
-    // userdefault 저장
-    func saveAllData() {
-        let data = tasks.map {
-            [
-                "text": $0.text,
-                "isDone": $0.isDone
-            ] as [String : Any]
-        }
-        
-        print(type(of: data))
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(data, forKey: "items")
-        userDefaults.synchronize()
-    }
-    
-    // userDefault 데이터 불러오기
-    func loadAllData() {
-        let userDefaults = UserDefaults.standard
-        guard let data = userDefaults.object(forKey: "items") as? [[String: AnyObject]] else {
-            return
-        }
-        
-        print(data.description)
-        
-        // tasks 배열에 저장하기
-        print(type(of: data))
-        tasks = data.map {
-            let text = $0["text"] as? String
-            let isDone = $0["isDone"] as? Bool
-            
-            return TaskData(text: text!, isDone: isDone!)
-        }
-    }
-    
-    func loadCompletedData() {
-        let userDefaults = UserDefaults.standard
-        guard let data = userDefaults.object(forKey: "completedItems") as? [[String: AnyObject]] else {
-            return
-        }
-        
-        doneTasks = data.map {
-            let text = $0["text"] as? String
-            let isDone = $0["isDone"] as? Bool
-            return TaskData(text: text!, isDone: isDone!)
-        }
-    }
-    
-    func saveCompletedData() {
-        let data = doneTasks.map {
-            [
-                "text": $0.text,
-                "isDone": $0.isDone
-            ] as [String : Any]
-        }
-        
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(data, forKey: "completedItems")
-        userDefaults.synchronize()
-    }
 }
