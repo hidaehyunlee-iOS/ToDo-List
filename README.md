@@ -1,4 +1,4 @@
-# Today's To Do
+> 👆🏻 여기 햄버거 버튼을 눌러 목차를 확인하세요.
 
 ## 01. 개요
 
@@ -17,12 +17,11 @@
   - **Data Storage**: `UserDefaults`
 
 
-
 ## 02. 구현 기능
 
-![image-20230811170556343](/Users/daelee/Library/Application Support/typora-user-images/image-20230811170556343.png)
+<img width="2013" alt="image" src="https://github.com/hidaehyunlee-iOS/ToDo-List/assets/37580034/9a731d29-f62f-4df1-b1ee-9137fe90a813">
 
-#### TodoListViewController
+#### 2.1. TodoListViewController
 
 > 유저의 할 일 목록과 완료한 일 목록을 보여주고 관리합니다.
 
@@ -33,15 +32,17 @@
 - `+` 버튼을 눌러 `EntryViewController`로 이동하여 새로운 할 일을 추가할 수 있습니다.
 - userDefaults를 통해 앱을 종료해도 사용자 데이터를 유지시킵니다.
 
-#### EntryViewController
+#### 2.2. EntryViewController
 
-> 새로운 할 일을 입력받아 TodoList에 추가한다.
+> 새로운 할 일을 입력받아 TodoList에 추가합니다.
+>>>>>>> d20f0a35e6520229bb379ac970df858ed9037708
 
 - `UITextField`에 할 일 텍스트 입력 후 '저장' 버튼을 누르거나 키보드의 Return 키를 누르면 할 일을 TodoList에 추가합니다.
 - `didAddHandler` 클로저를 호출하여 할 일 추가가 완료되었음을 알립니다.
 - 할 일이 추가되면 `tasks` 배열에 새로운 할 일 객체를 추가하고, TodoList 화면으로 pop 합니다.
 
 
+<br>
 
 ## 03. 핵심 경험
 
