@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--EntryView Controller-->
+        <scene sceneID="etQ-0t-YwB">
+            <objects>
+                <viewController storyboardIdentifier="EntryViewController" id="gzi-VM-rXF" userLabel="EntryView Controller" customClass="EntryViewController" customModule="TodoList" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aEu-z0-zGB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wx4-SN-gDP">
+                                <rect key="frame" x="0.0" y="74" width="393" height="778"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="할 일을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jcd-PN-7SR">
+                                        <rect key="frame" x="20" y="41" width="353" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aXl-R4-LvJ"/>
+                        <color key="backgroundColor" red="0.67450982329999998" green="0.60392159219999997" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Wx4-SN-gDP" secondAttribute="bottom" id="BXT-Yh-4Kz"/>
+                            <constraint firstItem="Wx4-SN-gDP" firstAttribute="trailing" secondItem="aXl-R4-LvJ" secondAttribute="trailing" id="C9p-HX-QVO"/>
+                            <constraint firstItem="Wx4-SN-gDP" firstAttribute="top" secondItem="aXl-R4-LvJ" secondAttribute="top" constant="15" id="c0D-Cb-4w4"/>
+                            <constraint firstItem="Wx4-SN-gDP" firstAttribute="leading" secondItem="aXl-R4-LvJ" secondAttribute="leading" id="mUB-rr-p9v"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="GIQ-wP-5b9"/>
+                    <connections>
+                        <outlet property="field" destination="jcd-PN-7SR" id="7nX-Cw-BeG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fi4-ex-ckG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2373.2824427480914" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
