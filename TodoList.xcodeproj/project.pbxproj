@@ -17,6 +17,7 @@
 		DE4DAB2C2A85F35C00777AA5 /* EntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE4DAB2A2A85F35C00777AA5 /* EntryViewController.storyboard */; };
 		DE514AFA2A80D27B0088123F /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE514AF92A80D27B0088123F /* EntryViewController.swift */; };
 		DE7708352A985B58005F9079 /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7708342A985B58005F9079 /* TaskDataManager.swift */; };
+		DEC7BCA52A987F9F004B97E9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC7BCA42A987F9F004B97E9 /* UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		DE4DAB2B2A85F35C00777AA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TodoList/View/Base.lproj/EntryViewController.storyboard; sourceTree = "<group>"; };
 		DE514AF92A80D27B0088123F /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		DE7708342A985B58005F9079 /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
+		DEC7BCA42A987F9F004B97E9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		DE398D5A2A7A01FD00C035F2 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				DEC7BCA32A987F7E004B97E9 /* Extension */,
 				DE398D712A7A656500C035F2 /* Controller */,
 				DE398D702A7A655D00C035F2 /* View */,
 				DE398D6F2A7A654600C035F2 /* Model */,
@@ -101,6 +104,14 @@
 				DE514AF92A80D27B0088123F /* EntryViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		DEC7BCA32A987F7E004B97E9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DEC7BCA42A987F9F004B97E9 /* UIView.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +189,7 @@
 				DE398D732A7A664C00C035F2 /* TodoListViewController.swift in Sources */,
 				DE398D5C2A7A01FD00C035F2 /* AppDelegate.swift in Sources */,
 				DE514AFA2A80D27B0088123F /* EntryViewController.swift in Sources */,
+				DEC7BCA52A987F9F004B97E9 /* UIView.swift in Sources */,
 				DE398D5E2A7A01FD00C035F2 /* SceneDelegate.swift in Sources */,
 				DE7708352A985B58005F9079 /* TaskDataManager.swift in Sources */,
 				DE398D772A7A6D7500C035F2 /* TaskData.swift in Sources */,

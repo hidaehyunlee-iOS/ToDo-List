@@ -13,7 +13,8 @@ class TaskDataManager {
         let data = tasks.map {
             [
                 "text": $0.text,
-                "isDone": $0.isDone
+                "isDone": $0.isDone,
+                "category": $0.category
             ] as [String : Any]
         }
         
@@ -31,8 +32,9 @@ class TaskDataManager {
         tasks = data.map {
             let text = $0["text"] as? String
             let isDone = $0["isDone"] as? Bool
+            let category = $0["category"] as? String
             
-            return TaskData(text: text!, isDone: isDone!)
+            return TaskData(text: text!, isDone: isDone!, category: category!)
         }
     }
     
@@ -41,7 +43,8 @@ class TaskDataManager {
         let data = doneTasks.map {
             [
                 "text": $0.text,
-                "isDone": $0.isDone
+                "isDone": $0.isDone,
+                "category": $0.category
             ] as [String : Any]
         }
         
@@ -59,7 +62,9 @@ class TaskDataManager {
         doneTasks = data.map {
             let text = $0["text"] as? String
             let isDone = $0["isDone"] as? Bool
-            return TaskData(text: text!, isDone: isDone!)
+            let category = $0["category"] as? String
+
+            return TaskData(text: text!, isDone: isDone!, category: category!)
         }
     }
 }

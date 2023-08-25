@@ -11,9 +11,11 @@ import UIKit
 struct TaskData {
     var text: String = ""
     var isDone: Bool = false
+    var category: String = ""
     
-    init(text: String, isDone: Bool = false) {
+    init(text: String, isDone: Bool, category: String) {
         self.text = text
         self.isDone = isDone
+        self.category = category
     }
 }
