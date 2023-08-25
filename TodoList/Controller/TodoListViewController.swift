@@ -92,6 +92,31 @@ class TodoListViewController: UIViewController {
     }
 }
 
+extension TodoListViewController {
+    func getTaskToShow(_ section: Int, _ row: Int) -> TaskData {
+        let category: String
+        
+        switch section {
+            case 0:
+                category = "내일배움캠프"
+            case 1:
+                category = "개인 프로젝트"
+            case 2:
+                category = "일상"
+            case 3:
+                category = "여행"
+            default:
+                category = ""
+        }
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return tasks.filter { $0.category == category }[row]
+        } else {
+            return doneTasks.filter { $0.category == category }[row]
+        }
+    }
+}
+
 extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -108,39 +133,15 @@ extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        var taskToShow: TaskData
+        var taskToShow = getTaskToShow(indexPath.section, indexPath.row)
         
         if segmentedControl.selectedSegmentIndex == 0 {
-            if indexPath.section == 0 {
-                taskToShow = tasks.filter { $0.category == "내일배움캠프" }[indexPath.row]
-            } else if indexPath.section == 1 {
-                taskToShow = tasks.filter { $0.category == "개인 프로젝트" }[indexPath.row]
-            } else if indexPath.section == 2 {
-                taskToShow = tasks.filter { $0.category == "일상" }[indexPath.row]
-            } else {
-                taskToShow = tasks.filter { $0.category == "여행" }[indexPath.row]
-            }
-        } else {
-            if indexPath.section == 0 {
-                taskToShow = doneTasks.filter { $0.category == "내일배움캠프" }[indexPath.row]
-            } else if indexPath.section == 1 {
-                taskToShow = doneTasks.filter { $0.category == "개인 프로젝트" }[indexPath.row]
-            } else if indexPath.section == 2 {
-                taskToShow = doneTasks.filter { $0.category == "일상" }[indexPath.row]
-            } else {
-                taskToShow = doneTasks.filter { $0.category == "여행" }[indexPath.row]
-            }
-        }
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            taskToShow = tasks[indexPath.row]
-            
+            taskToShow.isDone = true
+
             let dialog = UIAlertController(title: "\(taskToShow.text)", message: "🎉 할 일을 완료했습니다.", preferredStyle: .alert)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 dialog.dismiss(animated: true, completion: nil)
             }
-            
-            taskToShow.isDone = true
             
             if taskToShow.isDone {
                 self.present(dialog, animated: true, completion: nil)
@@ -148,7 +149,6 @@ extension TodoListViewController: UITableViewDelegate {
                 tasks.remove(at: indexPath.row)
             }
         } else {
-            taskToShow = doneTasks[indexPath.row]
             taskToShow.isDone = false
             
             tasks.append(taskToShow)
@@ -167,55 +167,32 @@ extension TodoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let category: String
+        
+        switch section {
+        case 0:
+            category = "내일배움캠프"
+        case 1:
+            category = "개인 프로젝트"
+        case 2:
+            category = "일상"
+        case 3:
+            category = "여행"
+        default:
+            category = ""
+        }
+        
         if segmentedControl.selectedSegmentIndex == 0 {
-            if section == 0 {
-                return tasks.filter { $0.category == "내일배움캠프" }.count
-            } else if section == 1 {
-                return tasks.filter { $0.category == "개인 프로젝트" }.count
-            } else if section == 2 {
-                return tasks.filter { $0.category == "일상" }.count
-            } else {
-                return tasks.filter { $0.category == "여행" }.count
-            }
+            return tasks.filter { $0.category == category }.count
         } else {
-            if section == 0 {
-                return doneTasks.filter { $0.category == "내일배움캠프" }.count
-            } else if section == 1 {
-                return doneTasks.filter { $0.category == "개인 프로젝트" }.count
-            } else if section == 2 {
-                return doneTasks.filter { $0.category == "일상" }.count
-            } else {
-                return doneTasks.filter { $0.category == "여행" }.count
-            }
+            return doneTasks.filter { $0.category == category }.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let taskToShow: TaskData
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            if indexPath.section == 0 {
-                taskToShow = tasks.filter { $0.category == "내일배움캠프" }[indexPath.row]
-            } else if indexPath.section == 1 {
-                taskToShow = tasks.filter { $0.category == "개인 프로젝트" }[indexPath.row]
-            } else if indexPath.section == 2 {
-                taskToShow = tasks.filter { $0.category == "일상" }[indexPath.row]
-            } else {
-                taskToShow = tasks.filter { $0.category == "여행" }[indexPath.row]
-            }
-        } else {
-            if indexPath.section == 0 {
-                taskToShow = doneTasks.filter { $0.category == "내일배움캠프" }[indexPath.row]
-            } else if indexPath.section == 1 {
-                taskToShow = doneTasks.filter { $0.category == "개인 프로젝트" }[indexPath.row]
-            } else if indexPath.section == 2 {
-                taskToShow = doneTasks.filter { $0.category == "일상" }[indexPath.row]
-            } else {
-                taskToShow = doneTasks.filter { $0.category == "여행" }[indexPath.row]
-            }
-        }
+        let taskToShow = getTaskToShow(indexPath.section, indexPath.row)
         
         cell.textLabel?.text = taskToShow.text
         cell.accessoryType = taskToShow.isDone ? .checkmark : .none
