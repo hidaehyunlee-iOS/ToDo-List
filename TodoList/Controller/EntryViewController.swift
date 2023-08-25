@@ -31,7 +31,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         let text = field.text!
         let item: TaskData = TaskData(text: text)
         
-        print("Add List title : \(item.text)")
+        print("Add Tasks title: \(item.text)")
         
         // TodoListViewController에 생성한 tasks 전역변수에 append
         tasks.append(item)

@@ -38,6 +38,7 @@
 #### 2.2. EntryViewController
 
 > 새로운 할 일을 입력받아 TodoList에 추가합니다.
+>>>>>>> d20f0a35e6520229bb379ac970df858ed9037708
 
 - `UITextField`에 할 일 텍스트 입력 후 '저장' 버튼을 누르거나 키보드의 Return 키를 누르면 할 일을 TodoList에 추가합니다.
 - `didAddHandler` 클로저를 호출하여 할 일 추가가 완료되었음을 알립니다.
