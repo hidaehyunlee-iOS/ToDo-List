@@ -61,6 +61,10 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rnu-Ts-foz">
+                                        <rect key="frame" x="76" y="210" width="240" height="315"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -78,6 +82,7 @@
                     <connections>
                         <outlet property="categoryButton" destination="WV8-UY-mOD" id="E96-Ez-Boh"/>
                         <outlet property="field" destination="jcd-PN-7SR" id="I3i-tf-EHu"/>
+                        <outlet property="imageView" destination="rnu-Ts-foz" id="XEk-4T-BMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fi4-ex-ckG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

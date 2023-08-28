@@ -10,7 +10,9 @@ import UIKit
 class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet var field: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     var selectedCategory = "내일배움캠프"
+    var imgUrl = "https://github.com/hidaehyunlee-iOS/ToDo-List/assets/37580034/c9f9b452-aa54-4ee3-baa3-5dbcc45c3c76"
     // var didAddHandler: (() -> Void)?
     
     override func viewDidLoad() {
@@ -18,6 +20,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         
         configureViews()
         configPopUpButton()
+        downloadImage()
     }
     
     private func configureViews() {
@@ -58,4 +61,33 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         // didAddHandler?()
         navigationController?.popViewController(animated: true)
     }
+    
+    func downloadImage() {
+            guard let imageURL = URL(string: imgUrl) else {
+                print("url 유효하지 않음")
+                return
+            }
+
+            // URLSession 생성
+            let session = URLSession.shared
+
+            let task = session.dataTask(with: imageURL) { (data, response, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+
+                guard let data = data, let image = UIImage(data: data) else {
+                    return
+                }
+
+                // Main Thread에서 이미지 설정
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
+
+            // 다운로드 시작
+            task.resume()
+        }
 }
