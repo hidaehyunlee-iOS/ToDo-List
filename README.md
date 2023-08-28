@@ -1,5 +1,19 @@
 > 👆🏻 여기 햄버거 버튼을 눌러 목차를 확인하세요.
 
+## 00. 기능 추가 
+> 2023-08-28
+
+<img width="589" alt="image" src="https://github.com/hidaehyunlee-iOS/ToDo-List/assets/37580034/440c1235-1825-4f42-b60b-87676eb1efbd">
+
+- TableView의 Section과 Header/Footer를 사용해서 Task 데이터 표시
+  - 카테고리 데이터를 기반으로 섹션 구분
+- 이미지 URL을 활용하여 UIImageView에 표시
+  - EntryViewController 에 추가
+
+
+
+<br>
+
 ## 01. 개요
 
 - **개발기간**: 2023-08-07(월) ~ 10(목)
